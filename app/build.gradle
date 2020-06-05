@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.test.testapp"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 5
+        versionName "1.5"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../testappsigning.jks")
+            storePassword "Password1"
+            keyAlias "test_alias"
+            keyPassword "Password1"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-config:19.1.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.1'
+
+    //implementation 'com.huawei.agconnect:agconnect-core:1.3.1.300'
+    //implementation 'com.huawei.hms:maps:4.0.1.302'
+    //implementation 'com.huawei.hms:location:4.0.4.300'
+
+}
